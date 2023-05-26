@@ -6,6 +6,6 @@ export const store = reactive({
     apiUrl_tv: "https://api.themoviedb.org/3/search/tv?api_key=37c8db7e9d59b35da2b1d4152b24799f&false&language=it-IT&query=",
     films: [],
     series: [],
-    imgFilm: "https://image.tmdb.org/t/p/w342",
+    imgFilm: "https://image.tmdb.org/t/p/w780",
 });
 

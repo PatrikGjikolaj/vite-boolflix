@@ -10,7 +10,7 @@ export default {
         }
     },
     mounted() {
-        axios.get(this.store.apiUrl_tv).then(r => {
+        axios.get(this.store.apiUrl_tv + "a").then(r => {
             this.store.loading = true
             this.store.series = [];
             this.store.series = r.data.results
@@ -25,13 +25,17 @@ export default {
 <template>
     <div class="container-fluid bg-secondary">
         <div class="container scrollBar bg-light bg-dark fixSize">
-            <h1 class="text-danger">Series</h1>
-            <div class="row flex-nowrap">
-                <div class="col-2 bg-light card" v-for="(serie, c) in store.series">
-                    <img :src="store.imgFilm + serie.backdrop_path" alt="">
+            <div class="row">
+                <div class="col-12">
+                    <h2 class="text-danger h50">Films</h2>
+                </div>
+            </div>
+            <div class="row flex-nowrap altezza100">
+                <div class="col-2 bg-light  border-start border-end p-0" v-for="(serie, c) in store.series">
+                    <img :src="store.imgFilm + serie.backdrop_path" alt="" class="cover">
                     <h4>{{ serie.name }}</h4>
                     <h5 class="tronca">{{ serie.original_name }}</h5>
-                    <h6>{{ serie.original_language }}</h6>
+                    <img :src="`https://flagcdn.com/16x12/${serie.original_language}.png`" alt="" class="flags">
                     <h6>{{ serie.vote_average }}</h6>
                 </div>
             </div>
@@ -44,16 +48,27 @@ export default {
     height: calc(50vh - 30px);
 }
 
-.card {
-    border: solid 1px;
+.h50 {
+    height: 50px;
 }
 
-img {
+.altezza100 {
+    height: calc(100% - 50px);
+}
+
+.cover {
     width: 100%;
+    /* height: 100%;
+    object-fit: cover; */
+}
+
+.flags {
+    width: 20px;
 }
 
 .scrollBar {
     overflow-x: auto;
+    overflow-y: hidden;
 }
 
 .tronca {
