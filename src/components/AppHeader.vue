@@ -12,17 +12,20 @@ export default {
   methods: {
     cercaFilm() {
       let indirizzo = this.store.apiUrl + this.filmScelto;
+      let indirizzoTv = this.store.apiUrl_tv + this.filmScelto;
 
-      this.inserisciTitolo(indirizzo)
+      this.inserisciTitolo(indirizzo, indirizzoTv)
     },
 
-    inserisciTitolo(indirizzo) {
+    inserisciTitolo(indirizzo, indirizzoTv) {
 
       axios.get(indirizzo).then(r => {
         this.store.films = [];
         this.store.films = r.data.results;
-        console.log(r.data.results)
-
+      });
+      axios.get(indirizzoTv).then(r => {
+        this.store.series = [];
+        this.store.series = r.data.results;
       });
     }
   }
