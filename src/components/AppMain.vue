@@ -14,8 +14,18 @@ export default {
 </script>
 
 <template>
-    <AppFilm />
-    <AppSerie />
+    <div class="container-fluid bg_grey">
+        <div class="row">
+            <div class="col-12">
+                <AppFilm />
+                <AppSerie />
+            </div>
+        </div>
+    </div>
 </template>
 
-<style scoped></style>
+<style scoped>
+.bg_grey {
+    background-color: grey;
+}
+</style>

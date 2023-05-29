@@ -24,44 +24,44 @@ export default {
 </script>
 
 <template>
-    <div class="container-fluid bg_grey">
-        <div class="container scrollBar bg-light bg-dark fixSize">
-            <div class="row">
-                <div class="col-12">
-                    <h2 class="text-danger h50">Films</h2>
-                </div>
+    <!-- <div class="container-fluid bg_grey"> -->
+    <div class="container-fluid bg-dark fixSize d-flex p-0">
+        <div class="row bg-dark align-items-center fix">
+            <div class="col-12 p-3 l_50">
+                <h2 class="text-danger vert">Films</h2>
             </div>
-            <div class="row flex-nowrap altezza100">
-                <div class="col-2 bg-light border-start border-end p-0" v-for="(film, c) in store.films">
-                    <v-hover v-slot="{ isHovering, props }">
-                        <v-card color="grey-lighten-4" v-bind="props" class="altezza1">
-                            <v-img :src="store.imgFilm + film.backdrop_path" alt="" cover class="altezza1">
-                                <v-expand-transition>
-                                    <div v-if="isHovering"
-                                        class="transition-fast-in-fast-out bg-grey-darken-2 v-card--reveal text-h2 altezza1 p-1">
-                                        <h4>{{ film.title }}</h4>
-                                        <h5 class="tronca">{{ film.original_title }}</h5>
-                                        <img :src="`https://flagcdn.com/16x12/${film.original_language}.png`" alt=""
-                                            class="flags">
-                                        <h6>Stelle:
-                                            <template v-for="i in stelle">
-                                                <template v-if="Math.ceil(film.vote_average / 2) >= i">
-                                                    <span class="text-warning">&#9733;</span>
-                                                </template>
-                                                <template v-else>
-                                                    <span>&#9734;</span>
-                                                </template>
+        </div>
+        <div class="row flex-nowrap altezza1 scrollBar">
+            <div class="col-2 bg-light border-end p-0" v-for="(film, c) in store.films">
+                <v-hover v-slot="{ isHovering, props }">
+                    <v-card color="grey-lighten-4" v-bind="props" class="altezza1">
+                        <v-img :src="store.imgFilm + film.backdrop_path" alt="" cover class="altezza1">
+                            <v-expand-transition>
+                                <div v-if="isHovering"
+                                    class="transition-fast-in-fast-out bg-grey-darken-2 v-card--reveal text-h2 altezza1 p-1">
+                                    <h4>{{ film.title }}</h4>
+                                    <h5 class="tronca">{{ film.original_title }}</h5>
+                                    <img :src="`https://flagcdn.com/16x12/${film.original_language}.png`" alt=""
+                                        class="flags">
+                                    <h6>Stelle:
+                                        <template v-for="i in stelle">
+                                            <template v-if="Math.ceil(film.vote_average / 2) >= i">
+                                                <span class="text-warning">&#9733;</span>
                                             </template>
-                                        </h6>
-                                    </div>
-                                </v-expand-transition>
-                            </v-img>
-                        </v-card>
-                    </v-hover>
-                </div>
+                                            <template v-else>
+                                                <span>&#9734;</span>
+                                            </template>
+                                        </template>
+                                    </h6>
+                                </div>
+                            </v-expand-transition>
+                        </v-img>
+                    </v-card>
+                </v-hover>
             </div>
         </div>
     </div>
+    <!-- </div> -->
 </template>
 
 <style scoped>
@@ -69,18 +69,13 @@ export default {
     height: calc(50vh - 30px);
 }
 
-.h50 {
-    height: 50px;
+.vert {
+    writing-mode: vertical-lr;
+    rotate: 180deg;
 }
 
-.altezza100 {
-    height: calc(100% - 50px);
-}
-
-.coverPat {
-    width: 100% !important;
-    height: 100% !important;
-    object-fit: cover !important;
+.l_50 {
+    width: 100px;
 }
 
 .flags {
@@ -92,15 +87,25 @@ export default {
     overflow-y: hidden;
 }
 
+::-webkit-scrollbar {
+    width: 5px;
+}
+
+::-webkit-scrollbar-track {
+    background-color: #dc3545;
+}
+
+::-webkit-scrollbar-thumb {
+    background-image: linear-gradient(180deg, #212529 40%, #dc3545 60%, #212529 40%);
+    box-shadow: inset 2px 2px 5px 0 rgba(#fff, 0.5);
+    border-radius: 100px;
+}
+
 .tronca {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
     width: 100%
-}
-
-.bg_grey {
-    background-color: grey;
 }
 
 .altezza1 {
