@@ -6,7 +6,8 @@ import axios from 'axios';
 export default {
     data() {
         return {
-            store
+            store,
+            stelle: 5
         }
     },
     mounted() {
@@ -36,7 +37,16 @@ export default {
                     <h4>{{ film.title }}</h4>
                     <h5 class="tronca">{{ film.original_title }}</h5>
                     <img :src="`https://flagcdn.com/16x12/${film.original_language}.png`" alt="" class="flags">
-                    <h6>{{ film.vote_average }}</h6>
+                    <h6>Stelle:
+                        <template v-for="i in stelle">
+                            <template v-if="Math.ceil(film.vote_average / 2) >= i">
+                                <span>&#9733;</span>
+                            </template>
+                            <template v-else>
+                                <span>&#9734;</span>
+                            </template>
+                        </template>
+                    </h6>
                 </div>
             </div>
         </div>
