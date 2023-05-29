@@ -33,15 +33,16 @@ export default {
         <div class="row flex-nowrap altezza1 scrollBar">
             <div class="col-2 bg-light border-end p-0" v-for="(serie, c) in store.series">
                 <v-hover v-slot="{ isHovering, props }">
-                    <v-card color="grey-lighten-4" v-bind="props" class="altezza1">
-                        <v-img :src="store.imgFilm + serie.backdrop_path" alt="" cover class="altezza1">
+                    <v-card color="grey-lighten-4" v-bind="props" class="altezza2">
+                        <v-img :src="store.imgFilm + serie.poster_path" alt="" cover class="altezza1">
                             <v-expand-transition>
                                 <div v-if="isHovering"
-                                    class="transition-fast-in-fast-out bg-grey-darken-2 v-card--reveal text-h2 altezza1 p-1">
-                                    <h4>{{ serie.name }}</h4>
-                                    <h5 class="tronca">{{ serie.original_name }}</h5>
-                                    <img :src="`https://flagcdn.com/16x12/${serie.original_language}.png`" alt=""
-                                        class="flags">
+                                    class="transition-fast-in-fast-out bg-grey-darken-2 v-card--reveal altezza1 p-1 scrolly">
+                                    <h5>Titolo: {{ serie.name }}</h5>
+                                    <h6 class="tronca">Titolo originale: {{ serie.original_name }}</h6>
+                                    <p>Descrizione: {{ serie.overview }}</p>
+                                    <img :src="`https://www.countryflagicons.com/FLAT/64/${serie.original_language}.png`"
+                                        alt="" class="flags">
                                     <h6>Stelle:
                                         <template v-for="i in stelle">
                                             <template v-if="Math.ceil(serie.vote_average / 2) >= i">
@@ -67,6 +68,9 @@ export default {
     height: calc(50vh - 30px);
 }
 
+.scrolly {
+    overflow-y: auto;
+}
 
 .vert {
     writing-mode: vertical-lr;
@@ -91,13 +95,13 @@ export default {
 }
 
 ::-webkit-scrollbar-track {
-    background-color: #dc3545;
+    /* background-color: #dc3545; */
+    background-image: linear-gradient(#212529 100%, #dc3545 0%);
 }
 
 ::-webkit-scrollbar-thumb {
-    background-image: linear-gradient(180deg, #212529 40%, #dc3545 60%, #212529 40%);
-    box-shadow: inset 2px 2px 5px 0 rgba(#fff, 0.5);
-    border-radius: 100px;
+    background-image: linear-gradient(#dc3545 100%, #212529 0%);
+    border-radius: 100%;
 }
 
 .tronca {
@@ -109,6 +113,11 @@ export default {
 
 .altezza1 {
     height: 100%;
+}
+
+.altezza2 {
+    height: 100%;
+    width: calc(95vw / 6);
 }
 
 .v-card--reveal {

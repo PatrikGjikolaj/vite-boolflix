@@ -32,15 +32,16 @@ export default {
             </div>
         </div>
         <div class="row flex-nowrap altezza1 scrollBar">
-            <div class="col-2 bg-light border-end p-0" v-for="(film, c) in store.films">
+            <div class="col-2 bg-light p-0" v-for="(film, c) in store.films">
                 <v-hover v-slot="{ isHovering, props }">
-                    <v-card color="grey-lighten-4" v-bind="props" class="altezza1">
-                        <v-img :src="store.imgFilm + film.backdrop_path" alt="" cover class="altezza1">
+                    <v-card v-bind="props" class="altezza2">
+                        <v-img :src="store.imgFilm + film.poster_path" alt="" cover class="altezza1">
                             <v-expand-transition>
                                 <div v-if="isHovering"
-                                    class="transition-fast-in-fast-out bg-grey-darken-2 v-card--reveal text-h2 altezza1 p-1">
-                                    <h4>{{ film.title }}</h4>
-                                    <h5 class="tronca">{{ film.original_title }}</h5>
+                                    class="transition-fast-in-fast-out bg-grey-darken-2 v-card--reveal altezza1 p-1 scrolly">
+                                    <h5>Titolo: {{ film.title }}</h5>
+                                    <h6 class="tronca">Titolo originale: {{ film.original_title }}</h6>
+                                    <p>Descrizione: {{ film.overview }}</p>
                                     <img :src="`https://flagcdn.com/16x12/${film.original_language}.png`" alt=""
                                         class="flags">
                                     <h6>Stelle:
@@ -69,6 +70,10 @@ export default {
     height: calc(50vh - 30px);
 }
 
+.scrolly {
+    overflow-y: auto;
+}
+
 .vert {
     writing-mode: vertical-lr;
     rotate: 180deg;
@@ -92,13 +97,13 @@ export default {
 }
 
 ::-webkit-scrollbar-track {
-    background-color: #dc3545;
+    /* background-color: #dc3545; */
+    background-image: linear-gradient(#212529 100%, #dc3545 0%);
 }
 
 ::-webkit-scrollbar-thumb {
-    background-image: linear-gradient(180deg, #212529 40%, #dc3545 60%, #212529 40%);
-    box-shadow: inset 2px 2px 5px 0 rgba(#fff, 0.5);
-    border-radius: 100px;
+    background-image: linear-gradient(#dc3545 100%, #212529 0%);
+    border-radius: 100%;
 }
 
 .tronca {
@@ -110,6 +115,11 @@ export default {
 
 .altezza1 {
     height: 100%;
+}
+
+.altezza2 {
+    height: 100%;
+    width: calc(95vw / 6);
 }
 
 .v-card--reveal {
